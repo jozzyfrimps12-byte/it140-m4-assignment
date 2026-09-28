@@ -10,18 +10,62 @@
 
 START hilow_game
 
+    # Welcome the player to the game.
+    DISPLAY "Welcome to the higher/lower game, Bella!"
+
     # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    # Obtain the lower and upper bounds.
+    DISPLAY "Enter the lower bound:"
+    INPUT lower_bound
+    DISPLAY "Enter the upper bound:"
+    INPUT upper_bound
+
+    # Repeat as needed until the bounds satisfy the requirement.
+    WHILE lower_bound >= upper_bound
+        DISPLAY "The lower bound must be less than the upper bound."
+        DISPLAY "Enter the lower bound:"
+        INPUT lower_bound
+        DISPLAY "Enter the upper bound:"
+        INPUT upper_bound
+    END WHILE
 
     # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+    # Generate the required random number from the valid range.
+    random_number = RANDOM(lower_bound, upper_bound)
 
     # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+    # Obtain and validate a guess using the selected bounds.
+    DISPLAY "Great, now guess a number between " + lower_bound + " and " + upper_bound + ":"
+    INPUT guess
+
+    WHILE guess < lower_bound OR guess > upper_bound
+        DISPLAY "Please guess a number between " + lower_bound + " and " + upper_bound + "."
+        INPUT guess
+    END WHILE
+
+    # Repeat the required game behavior until the correct guess.
+    WHILE guess != random_number
+
+        # Compare a valid guess and provide the required feedback.
+        IF guess < random_number THEN
+            DISPLAY "Nope, too low."
+        ELSE IF guess > random_number THEN
+            DISPLAY "Nope, too high."
+        END IF
+
+        # Obtain and validate another guess when play continues.
+        DISPLAY "Guess another number:"
+        INPUT guess
+
+        WHILE guess < lower_bound OR guess > upper_bound
+            DISPLAY "Please guess a number between " + lower_bound + " and " + upper_bound + "."
+            INPUT guess
+        END WHILE
+
+    END WHILE
+
+    # The correct guess has been made.
+    DISPLAY "You got it!"
 
 END hilow_game
 
